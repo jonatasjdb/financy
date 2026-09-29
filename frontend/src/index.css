@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* Tokens do Style Guide do Figma */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand: #1f6f43;
+  --color-brand-dark: #185a36;
+  --color-danger: #ef4444;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-gray-100: #f8f9fa;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #111827;
+
+  --color-green-base: #16a34a;
+  --color-green-light: #e0fae9;
+  --color-green-dark: #15803d;
+  --color-blue-base: #2563eb;
+  --color-blue-light: #dbeafe;
+  --color-blue-dark: #1d4ed8;
+  --color-purple-base: #9333ea;
+  --color-purple-light: #f3e8ff;
+  --color-purple-dark: #7e22ce;
+  --color-pink-base: #db2777;
+  --color-pink-light: #fce7f3;
+  --color-pink-dark: #be185d;
+  --color-red-base: #dc2626;
+  --color-red-light: #fee2e2;
+  --color-red-dark: #b91c1c;
+  --color-orange-base: #ea580c;
+  --color-orange-light: #ffedd5;
+  --color-orange-dark: #c2410c;
+  --color-yellow-base: #ca8a04;
+  --color-yellow-light: #f7f3ca;
+  --color-yellow-dark: #a16207;
+}
+
+@layer base {
+  html,
+  body {
+    @apply bg-gray-100 font-sans text-gray-800 antialiased;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  /* Ícone nativo do calendário discreto */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}

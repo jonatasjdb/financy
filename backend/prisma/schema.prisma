@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/infra/database/prisma/generated"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String        @id @default(uuid())
+  name         String
+  email        String        @unique
+  password     String
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  categories   Category[]
+  transactions Transaction[]
+
+  @@map("users")
+}
+
+model Category {
+  id           String        @id @default(uuid())
+  title        String
+  description  String?
+  icon         String
+  color        String
+  userId       String        @map("user_id")
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  @@index([userId])
+  @@map("categories")
+}
+
+model Transaction {
+  id            String   @id @default(uuid())
+  description   String
+  /// Valor armazenado em centavos para evitar erros de ponto flutuante
+  amountInCents Int      @map("amount_in_cents")
+  /// INCOME (receita) ou EXPENSE (despesa)
+  type          String
+  date          DateTime
+  categoryId    String   @map("category_id")
+  category      Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  userId        String   @map("user_id")
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@index([userId, date])
+  @@map("transactions")
+}

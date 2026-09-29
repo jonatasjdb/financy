@@ -1,0 +1,13 @@
+{
+  "name": "financy",
+  "private": true,
+  "description": "Financy - gestão de finanças pessoais (API GraphQL + React)",
+  "scripts": {
+    "setup": "npm install && node scripts/setup.mjs",
+    "dev": "concurrently -n api,web -c green,blue \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "test": "npm test --prefix backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
